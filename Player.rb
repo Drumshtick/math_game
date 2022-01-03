@@ -10,4 +10,12 @@ class Player
   def remove_life
     @lives = @lives - 1
   end
+
+  def winner_str
+    puts "  👑👑👑👑👑👑👑👑👑"
+    puts "👑👑👑 #{name} Wins! 👑👑👑"
+    puts "  👑👑👑👑👑👑👑👑👑"
+    puts
+    puts "With #{lives}💗 remaining."
+  end
 end

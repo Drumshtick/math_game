@@ -1,7 +1,6 @@
 class Turn
-
+  # Called a class variable
   @@num_turns = 0
-
   attr_reader :current_player, :q
 
   def initialize
@@ -22,11 +21,8 @@ class Turn
     q.create_query_string
   end
 
-  def correct_answer(guess)
-    if (guess == q.answer)
-      return true
-    end
-    return false
+  def is_correct(guess)
+    q.correct(guess)
   end
 
   def new_turn

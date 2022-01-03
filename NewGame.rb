@@ -2,33 +2,39 @@ class NewGame
 
   attr_reader :p1, :p2
 
+  @@new_game_str =    "
+  🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲
+ 🎲🎲🎲 New Game! 🎲🎲🎲
+  🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲
+                "
+  @@game_over_str = "
+  ⛔⛔⛔⛔ GAME OVER ⛔⛔⛔⛔"
+
   def initialize
     @p1 = Player.new("P1")
     @p2 = Player.new("P2") 
   end
 
   def play_game
-    puts
-    puts "     🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲"
-    puts "    🎲🎲🎲 New Game! 🎲🎲🎲"
-    puts "     🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲"
-    puts
+    puts @@new_game_str
     while @p1.lives != 0 && @p2.lives != 0 do
-      # Display lives
+      # Create new turn
       turn = Turn.new
       puts
       puts turn.new_turn
       puts "             #{p1.name}: #{p1.lives}/3 🆚 #{p2.name}: #{p2.lives}/3"
       puts
-
+      # print question & get result
       print "#{turn.current_player}: #{turn.ask_question}"
       player_answer = gets.chomp
       puts 
-      result = turn.correct_answer(player_answer.to_i)
+      # Verify result
+      result = turn.is_correct(player_answer)
       if (result)
         puts "#{turn.current_player}:✔️   Yes! You are correct."
         puts
       else
+        # answer incorrect remove life from player
         puts "#{turn.current_player}:❌   oh... You are incorrect."
         puts
         if (turn.current_player == "p1")
@@ -38,21 +44,13 @@ class NewGame
         end
       end
     end
+    # Award winner when loop completes
     if (p1.lives == 0)
-      puts "  👑👑👑👑👑👑👑👑👑👑👑👑"
-      puts "👑👑👑 #{p2.name} Wins! 👑👑👑"
-      puts "  👑👑👑👑👑👑👑👑👑👑👑👑"
-      puts 
-      puts "With #{p2.lives}💗 remaining."
+      puts p2.winner_str
     elsif (p2.lives == 0)
-      puts "  👑👑👑👑👑👑👑👑👑👑👑👑"
-      puts "👑👑👑 #{p1.name} Wins! 👑👑👑"
-      puts "  👑👑👑👑👑👑👑👑👑👑👑👑"
-      puts
-      puts "With #{p1.lives}💗 remaining."
+      puts p1.winner_str
     end
-    puts
-    puts "⛔⛔⛔⛔ GAME OVER ⛔⛔⛔⛔"
+    puts @@game_over_str
   end
 
 end
