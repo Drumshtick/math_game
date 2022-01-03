@@ -22,12 +22,14 @@ class NewGame
       turn = Turn.new
       puts
       puts turn.new_turn
-      puts "             #{p1.name}: #{p1.lives}/3 🆚 #{p2.name}: #{p2.lives}/3"
+      puts get_score
       puts
+
       # print question & get result
-      print "#{turn.current_player}: #{turn.ask_question}"
+      print make_question_str(turn)
       player_answer = gets.chomp
       puts 
+      
       # Verify result
       result = turn.is_correct(player_answer)
       if (result)
@@ -53,5 +55,12 @@ class NewGame
     puts @@game_over_str
   end
 
+  def get_score
+    "             #{p1.name}: #{p1.lives}/3 🆚 #{p2.name}: #{p2.lives}/3"
+  end
+
+  def make_question_str(turn)
+    "#{turn.current_player}: #{turn.ask_question}"
+  end
 end
 
