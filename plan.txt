@@ -1,0 +1,80 @@
+NewGame
+> Behavior
+  - Creates two players
+  - starts a turn
+  - Display scores / Get lives
+  - Award winner / End Game
+> State
+  - Scores
+> Methods
+   - initialize
+      - create two Players
+   - play_game
+    - Loop
+      - Display lives
+        - if a player has no lives end game
+      - Start new turn
+
+Player
+> Behavior
+  - Remove life
+  - Get amount of lives
+> State
+  - Lives
+> Methods
+  - initialize(p1 or p2)
+  - remove_life
+    - life -1
+  - Get Lives
+    - return lives
+
+Turn
+> Behavior
+  - display new turn indicator
+  - get which player's turn
+  - Get question / Display question
+  - get player answer
+  - get correct answer
+  - check answer
+> State
+  - store players turn
+  - new turn string
+  - player answer
+> Methods
+  - initialize
+    - new Question
+    - set players_turn
+  - whose_turn
+    - Return players_turn
+  - ask_question
+    - Question.query
+  - check_answer
+    - Question.correct_answer
+    - compare to user answer
+  - start_turn
+    - print ---- New Turn ----
+    - ask_question
+    - check answer
+    - return success/failure
+    
+
+
+Question
+> Behavior
+  - Get random numbers
+  - calculate correct result
+  - Create question string
+  - Return result
+> State
+  - Store random numbers
+  - store question string
+  - store correct result
+> Methods
+  - initialize
+    @num1
+    @num2
+    @answer = num1 + num2
+  - query
+    "What does num1 + num2 equal?"
+  - result  
+    @answer
